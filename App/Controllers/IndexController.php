@@ -3,20 +3,26 @@
  namespace App\Controllers;
      
     class IndexController{
+        private $view;
+        public function __construct(){
+            $this->view = new \stdClass();
+        }
         public function index(){
             //echo "estamos no indexcontroller e disparamos a action index";
-            $dados = array('sofa','cadeira', 'cama');
-            $this->render('index', $dados);
+            $this->view->dados = array('sofa','cadeira', 'cama');
+            $this->render('index');
         }
         public function sobreNos(){
             //echo "estamos no sobrenos e disparamos a action sobreNos";
-            $dados = array('notebook','desktop', 'tablet');
-            $this->render('sobreNos', $dados);
+            $this->view->dados = array('notebook','desktop', 'tablet');
+            $this->render('sobreNos');
         }
-        public function render($view, $dados){
+        public function render($view){
             $classAtual = get_class($this);
-            str_replace('App\\Controllers\\','');
-            require_once "../App/Views/index/".$view.".phtml";
+            $classAtual = str_replace('App\\Controllers\\','', $classAtual);
+            $classAtual= strtolower(str_replace('Controller', '', $classAtual));
+
+            require_once "../App/Views/".$classAtual."/".$view.".phtml";
         }
     }
 

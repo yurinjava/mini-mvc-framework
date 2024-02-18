@@ -5,14 +5,18 @@
     class IndexController{
         public function index(){
             //echo "estamos no indexcontroller e disparamos a action index";
-            require_once "../App/Views/index/index.phtml";
+            $dados = array('sofa','cadeira', 'cama');
+            $this->render('index', $dados);
         }
         public function sobreNos(){
             //echo "estamos no sobrenos e disparamos a action sobreNos";
-            require_once "../App/Views/index/sobreNos.phtml";
+            $dados = array('notebook','desktop', 'tablet');
+            $this->render('sobreNos', $dados);
         }
-        public function render($view){
-            require_once "../App/Views/index/sobreNos.phtml";
+        public function render($view, $dados){
+            $classAtual = get_class($this);
+            str_replace('App\\Controllers\\','');
+            require_once "../App/Views/index/".$view.".phtml";
         }
     }
 

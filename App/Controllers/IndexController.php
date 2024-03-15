@@ -13,26 +13,16 @@
        
        
         public function index(){
-            //echo "estamos no indexcontroller e disparamos a action index";
-           // $this->view->dados = array('sofa','cadeira', 'cama');
-           //instancia de conexao
-           //instanciar o modelo
-            Container::getModel('Produto');
-
-           $conn = new Connection();
-           $conn = $conn->getDb();
-
-           $produto = new Produto($conn);
-           $produtos = $produto->getProdutos();
-           $this->view->dados = $produtos;
-            $this->render('index', 'layout1');
+         
+        $produto = Container::getModel('Produto');
+        $produtos = $produto->getProdutos();
+        $this->view->dados = $produtos;
+        $this->render('index','layout 1');
         }
         public function sobreNos(){
           
-            $conn = new Connection();
-            $conn = $conn->getDb();
-            $info = new Info($conn);
-            $informacoes = $info->getInfo();
+        $info = Container::getModel('Info');
+        $informacoes = $info->getInfo();
 
             $this->view->dados = $informacoes;
             $this->render('sobreNos', 'layout2');
